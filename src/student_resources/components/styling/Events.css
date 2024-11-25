@@ -1,0 +1,169 @@
+/* Main container for the events carousel */
+.events-carousel-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 100%; 
+  margin: 0 auto;
+  padding: 20px 0; 
+}
+
+.events-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: 90%; 
+  margin: 0 auto;
+}
+
+/* Wrapper to hold the event cards in a row */
+.events-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease;
+}
+
+/* Each event card styling */
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 22vw;
+  max-width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid #e0e0e0;
+  align-self: center;
+  margin: 0 10px;
+}
+
+.event-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Top line decoration */
+.event-card-line {
+  width: 100%;
+  height: 1%;
+  background-color: #002855;
+}
+
+/* Event card image wrapper to add hover effect */
+.event-image-wrapper {
+  position: relative;
+}
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-image {
+  transform: scale(1.05);
+}
+
+.event-card:hover .event-image-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200, 16, 46, 0.1); /* Optional: Slight overlay */
+  z-index: 1;
+}
+
+/* Event card content */
+.event-card-content {
+  padding: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.event-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #002855;
+  margin: 10px 0;
+}
+
+.event-date-time {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.event-description {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 8px 0;
+}
+
+.event-location {
+  font-size: 0.85rem;
+  color: #777;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.event-read-more {
+  font-size: 0.9rem;
+  color: #c8102e;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.event-read-more:hover {
+  text-decoration: underline;
+}
+
+/* New container for arrow buttons */
+.arrow-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+/* Arrow buttons */
+.arrow-button {
+  background-color: #002855;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  opacity: 0.9;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.arrow-button:hover {
+  background-color: #c8102e;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.arrow-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
