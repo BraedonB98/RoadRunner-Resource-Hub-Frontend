@@ -5,9 +5,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  max-width: 100%; 
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px 0; 
+  padding: 20px 0;
 }
 
 .events-carousel {
@@ -15,10 +15,11 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  max-width: 90%; 
+  max-width: 90%;
   margin: 0 auto;
 }
 
+/* Wrapper to hold the event cards in a row */
 /* Wrapper to hold the event cards in a row */
 .events-wrapper {
   display: flex;
@@ -31,6 +32,8 @@
 /* Each event card styling */
 .event-card {
   display: flex;
+  flex: 0 0 auto;
+  width: 100%;
   flex-direction: column;
   background-color: white;
   border-radius: 12px;
@@ -38,12 +41,19 @@
   overflow: hidden;
   width: 22vw;
   max-width: 300px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
   cursor: pointer;
   position: relative;
   border: 1px solid #e0e0e0;
   align-self: center;
   margin: 0 10px;
+}
+
+.events-wrapper.single-card .event-card {
+  width: 90%; /* Make the card wider when there is only one card per slide */
+  max-width: none; /* Remove the max-width constraint */
+  margin: 0 auto; /* Center the card */
 }
 
 .event-card:hover {
@@ -54,8 +64,6 @@
 /* Top line decoration */
 .event-card-line {
   width: 100%;
-  height: 1%;
-  background-color: #002855;
 }
 
 /* Event card image wrapper to add hover effect */
