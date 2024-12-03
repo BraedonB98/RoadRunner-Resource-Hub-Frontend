@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"; 
-import ResourceCard from "../components/ResourceCard";
+import ResourceList from "../components/ResourceList";
 import "../../student_resources/pages/styling/StudentResources.css";
 import { AuthContext } from "../../shared/context/auth-context";
 import { AiFillFileAdd } from "react-icons/ai";
@@ -69,15 +69,15 @@ const MiddleYears = () => {
 
                 <div className="welcome-container">
 
-                    <ResourceCard name= "Tutoring Services" />
+                    <ResourceList name= "Tutoring Services" />
 
-                    <ResourceCard name= "Library" />
+                    <ResourceList name= "Library" />
 
-                    <ResourceCard name= "Career Link" />
+                    <ResourceList name= "Career Link" />
 
-                    <ResourceCard name= "Writing Center" />
+                    <ResourceList name= "Writing Center" />
 
-                    <ResourceCard resources={resources} />
+                    <ResourceList resources={resources} />
 
                 </div>
 

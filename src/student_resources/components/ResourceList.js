@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react"; // Import React and the useState, useEffect, and useContext hooks
-import { Resource, resources } from "../components/Resource"; // Import Resource component and resources list
+import { Resource } from "./Resource"; // Import Resource component and resources list
 
 import { AuthContext} from "../../shared/context/auth-context";
 
 import "../components/styling/ResourceCard.css";
 import toast from "react-hot-toast";
 
-const ResourceCard = (props) => {
+const ResourceList = (props) => {
     const [resourcesState, setResourcesState] = useState([]); // State for resources
 
     const auth = useContext(AuthContext);
@@ -15,21 +15,7 @@ const ResourceCard = (props) => {
         // If props contain resource data from the backend, use that data directly
         if (props.resources) {
             setResourcesState(props.resources);
-        } else if (props.search || props.name) {
-            // If no backend resources, filter hardcoded resources by search or name prop
-            if (props.search) {
-                setResourcesState(
-                    resources.filter(
-                        (resource) =>
-                            resource.search.filter((search) =>
-                                search.includes(props.search)
-                            ).length > 0
-                    )
-                );
-            } else if (props.name) {
-                setResourcesState(resources.filter((resource) => resource.name === props.name));
-            }
-        }
+        } 
 
     }, [props.resources, props.search, props.name, props.description, props.link, props.image]);
 
@@ -75,7 +61,6 @@ const ResourceCard = (props) => {
                         description={resource.description}
                         link={resource.link}
                         image={resource.image}
-                        isBackendResource={!!resource._id}
                         onDelete={() => deleteResource(resource._id)}
                     />
                 ))

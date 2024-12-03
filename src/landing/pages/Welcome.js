@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from "react";
-import ResourceCard from "../../student_resources/components/ResourceCard";
+import ResourceList from "../../student_resources/components/ResourceList";
 import AddResourceModal from "../../student_resources/components/AddResourceModal";
 
 import { AiFillFileAdd } from "react-icons/ai";
@@ -70,21 +70,21 @@ const Welcome = () => {
         <div className="welcome-container">
           {/* This is the container for the cards, put all the cards in here to make them appear in a row */}
 
-              <ResourceCard name="Canvas" />
+              <ResourceList name="Canvas" />
 
-              <ResourceCard name="Student Email" />
+              <ResourceList name="Student Email" />
 
-              <ResourceCard name= "Financial Aid" />
+              <ResourceList name= "Financial Aid" />
 
-              <ResourceCard name="Degree Progress Report" />
+              <ResourceList name="Degree Progress Report" />
 
-              <ResourceCard name="Academic Advising" />
+              <ResourceList name="Academic Advising" />
 
-              <ResourceCard name= "VMock" />
+              <ResourceList name= "VMock" />
 
-              <ResourceCard name="Register for Classes" />
+              <ResourceList name="Register for Classes" />
 
-              <ResourceCard resources={resources} />
+              <ResourceList resources={resources} />
 
           </div>
 

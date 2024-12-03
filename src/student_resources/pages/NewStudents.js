@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from "react";
-import ResourceCard from "../components/ResourceCard";
+import ResourceList from "../components/ResourceList";
 
 import { AiFillFileAdd } from "react-icons/ai";
 import AddResourceModal from "../components/AddResourceModal";
@@ -72,17 +72,15 @@ const FirstYear = () => {
 
                 <div className="welcome-container">
 
-                    <ResourceCard name= "Student Organizations" />
+                    <ResourceList name= "Student Organizations" />
 
-                    <ResourceCard name= "Campus Map" />
+                    <ResourceList name= "Campus Map" />
 
-                    <ResourceCard name= "Auraria Campus Website" />
+                    <ResourceList name= "Auraria Campus Website" />
 
-                    <ResourceCard name= "Class Schedule" />
+                    <ResourceList name= "Class Schedule" />
 
-                    <ResourceCard name= "Student Email" />
-
-                    <ResourceCard resources={resources} />
+                    <ResourceList name= "Student Email" />
 
                 </div>
 

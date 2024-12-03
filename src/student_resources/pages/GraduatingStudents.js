@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import ResourceCard from "../components/ResourceCard";
+import ResourceList from "../components/ResourceList";
 import "../../student_resources/pages/styling/StudentResources.css";
 
 import { AiFillFileAdd } from "react-icons/ai";
@@ -70,15 +70,15 @@ const LastYear = () => {
 
                 <div className="welcome-container">
 
-                    <ResourceCard name="Apply for Graduation" />
+                    <ResourceList name="Apply for Graduation" />
 
-                    <ResourceCard name= "Graduate Financial Aid" />
+                    <ResourceList name= "Graduate Financial Aid" />
 
-                    <ResourceCard name="Career Link" />
+                    <ResourceList name="Career Link" />
 
-                    <ResourceCard name="C2 Hub" />
+                    <ResourceList name="C2 Hub" />
 
-                    <ResourceCard resources = {resources} />
+                    <ResourceList resources = {resources} />
 
                 </div>
 
