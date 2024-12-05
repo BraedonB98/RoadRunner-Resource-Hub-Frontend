@@ -87,16 +87,16 @@ const StudentResourcesPage = (props) => {
         <br />
         <br />
 
+       
+
+       
+        <EventsComponent />
         {auth.isLoggedIn && (
           <Button className="new-resource-button" onClick={openResourceModal}>
             {" "}
             Create New Resource <AiFillFileAdd />{" "}
           </Button>
         )}
-
-        {/* <button className="new-resource-button" onClick={openModal}> Add New Resource <AiFillFileAdd /> </button> */}
-
-        <EventsComponent />
         <ResourceList resources={loadedResources} />
 
         <ResourceModal show={showResourceModal} onCancel={closeResourceModal} />
