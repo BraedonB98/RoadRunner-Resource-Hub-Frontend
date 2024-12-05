@@ -1,22 +1,14 @@
 /* Student Resources Page Styling */
-
-.homePage-background,
-.NewStudents-background,
-.ContinuingStudents-background,
-.GraduatingStudents-background {
+.student-resource-page-background {
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
   width: 100%;
   z-index: 1;
 }
 
-.homePage-background::before,
-.NewStudents-background::before,
-.ContinuingStudents-background::before,
-.GraduatingStudents-background::before {
+.student-resource-page-background::before {
   content: "";
   position: absolute;
   top: 0;
@@ -30,20 +22,4 @@
     0.5
   ); /* Dark overlay to improve text readability */
   z-index: -1;
-}
-
-.homePage-background {
-  background-image: url(../../../../public/images/homeBackground.jpg);
-}
-
-.NewStudents-background {
-  background-image: url(../../../../public/images/NewStudentsBackground.jpg);
-}
-
-.ContinuingStudents-background {
-  background-image: url(../../../../public/images/ContinuingStudentsBackground.jpg);
-}
-
-.GraduatingStudents-background {
-  background-image: url(../../../../public/images/GraduationBackground.jpg);
 }

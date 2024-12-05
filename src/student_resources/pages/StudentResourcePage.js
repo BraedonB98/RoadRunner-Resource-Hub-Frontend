@@ -53,9 +53,39 @@ const StudentResourcesPage = (props) => {
     setShowResourceModal(false);
   };
 
+  const decideBackgroundImage = (audience) => {
+    if (audience === "NewStudents") {
+      return (
+        process.env.REACT_APP_ASSET_URL +
+        "/data/frontendref/images/backgroundImages/NewStudents.jpg"
+      );
+    } else if (audience === "ContinuingStudents") {
+      return (
+        process.env.REACT_APP_ASSET_URL +
+        "/data/frontendref/images/backgroundImages/ContinuingStudents.jpg"
+      );
+    } else if (audience === "GraduatingStudents") {
+      return (
+        process.env.REACT_APP_ASSET_URL +
+        "/data/frontendref/images/backgroundImages/GraduatingStudents.jpg"
+      );
+    } else {
+      return (
+        process.env.REACT_APP_ASSET_URL +
+        "/data/frontendref/images/backgroundImages/Home.jpg"
+      );
+    }
+  };
+  const backgroundImageURL = decideBackgroundImage(props.audience);
+
   return (
     <React.Fragment>
-      <div className="homePage-background">
+      <div
+        className="student-resource-page-background"
+        style={{
+          backgroundImage: `url(${backgroundImageURL})`,
+        }}
+      >
         <br />
         <br />
         <br />
