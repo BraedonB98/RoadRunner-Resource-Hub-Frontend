@@ -115,20 +115,22 @@ const AuthPage = () => {
       try {
         const email = formState.inputs.email.value;
         console.log(email);
-        const userName = email.substring(0, email.indexOf("@"));
+        const userName = email.split("@")[0];
+        const birthday = new Date(formState.inputs.birthday.value);
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_API_URL}/user/createuser`,
+          `${process.env.REACT_APP_BACKEND_API_URL}/user/student/createstudent`,
           "POST",
           JSON.stringify({
             firstName: formState.inputs.firstName.value,
             middleName: formState.inputs.middleName.value,
             lastName: formState.inputs.lastName.value,
+            phoneNumber: formState.inputs.phoneNumber.value,
             userName: userName,
             schoolStudentID: formState.inputs.schoolStudentID.value,
-            birthday: formState.inputs.birthday.value,
-            preferredName: formState.inputs.preferredName,
-            gender: formState.inputs.gender,
-            pronouns: formState.inputs.pronouns,
+            birthdate: birthday,
+            preferredName: formState.inputs.firstName.value,
+            gender: formState.inputs.gender.value || "Male",
+            pronouns: formState.inputs.pronouns.value || "He/Him/His",
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
@@ -218,7 +220,9 @@ const AuthPage = () => {
                 id="birthday"
                 type="date"
                 label="Birthday"
+                validators={[]}
                 initialValid={true}
+                initialValue="2000-01-01"
                 placeholder="MM/DD/YYYY"
                 errorText="Please enter your birthday."
                 onInput={inputHandler}
@@ -227,12 +231,15 @@ const AuthPage = () => {
                 classname="auth-page-input"
                 element="select"
                 id="gender"
+                initialState="male"
                 label="Gender"
+                validators={[]}
                 initialValid={true}
                 errorText="Please select a gender."
                 onInput={inputHandler}
                 options={[
                   { value: "Male", displayValue: "Male" },
+
                   { value: "Female", displayValue: "Female" },
                   { value: "Other", displayValue: "Other" },
                   {
@@ -246,6 +253,7 @@ const AuthPage = () => {
                 element="select"
                 id="pronouns"
                 label="Pronouns"
+                validators={[]}
                 initialValid={true}
                 errorText="Please select pronouns."
                 onInput={inputHandler}

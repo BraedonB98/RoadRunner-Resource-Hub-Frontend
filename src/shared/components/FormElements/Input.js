@@ -4,13 +4,6 @@ import { validate } from "../../util/validators";
 import "./styling/Input.css";
 
 const inputReducer = (state, action) => {
-  if (!action.validators || action.validators.length === 0) {
-    return {
-      ...state,
-      value: action.val,
-      isValid: true,
-    };
-  }
   switch (action.type) {
     case "CHANGE":
       return {
@@ -31,7 +24,7 @@ const inputReducer = (state, action) => {
 const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.initialValue || "",
-    isTouched: props.initialValid || false,
+    isTouched: false,
     isValid: props.initialValid || false,
   });
 
@@ -41,16 +34,6 @@ const Input = (props) => {
   useEffect(() => {
     onInput(id, value, isValid);
   }, [id, value, isValid, onInput]);
-
-  useEffect(() => {
-    if (inputState.value !== props.initialValue) {
-      dispatch({
-        type: "CHANGE",
-        val: inputState.value,
-        validators: props.validators,
-      });
-    }
-  }, [inputState.value, props.initialValue, props.validators]);
 
   const changeHandler = (event) => {
     dispatch({
@@ -63,7 +46,6 @@ const Input = (props) => {
   const touchHandler = () => {
     dispatch({ type: "TOUCH" });
   };
-
   let element;
   if (props.element === "select") {
     element = (
@@ -74,9 +56,7 @@ const Input = (props) => {
         value={inputState.value}
       >
         {props.options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.displayValue}
-          </option>
+          <option value={option.value}>{option.displayValue}</option>
         ))}
       </select>
     );

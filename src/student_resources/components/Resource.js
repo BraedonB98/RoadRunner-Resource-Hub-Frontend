@@ -12,7 +12,11 @@ const Resource = (props) => {
       className="resource-card"
       onClick={() => window.open(props.link, "_blank")}
     >
-      <img src={props.image} alt={props.title} className="resource-image" />
+      <img
+        src={process.env.REACT_APP_ASSET_URL + props.image}
+        alt={props.title}
+        className="resource-image"
+      />
       <h2 className="resource-heading">{props.title}</h2>
       <p className="resource-description">{props.description}</p>
     </Card>

@@ -76,70 +76,59 @@ const ResourceModal = (props) => {
     //Validate the form fields, if the form is not valid, don't submit the form
     if (!resourceFormValidation()) {
       return;
+    } else {
+      addResource();
     }
+  };
+  //Send a request to the backend to add the resource to the database
+  // WORK IN PROGRESS
+  const addResource = async () => {
+    try {
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_API_URL + "/resource/",
+        "POST",
+        JSON.stringify({
+          title: title,
+          tags: [],
+          description: description,
+          link: link,
+          audience: audience.map((audience) => audience.value),
+          image: image,
+        }),
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token,
+        }
+      );
 
-    //Add the resource to the database
-    console.log("Adding resource to the database...");
-    console.log("Title:", title);
-    console.log("Description:", description);
-    console.log("Audience:", audience);
-    console.log("Link:", link);
-    console.log("Image:", image);
+      console.log(responseData);
 
-    //Send a request to the backend to add the resource to the database
-    // WORK IN PROGRESS
-    const addResource = async () => {
-      try {
-        const responseData = await sendRequest(
-          // 'http://localhost:5000/api/resource/resources', // Temporary URL to test the request
-          process.env.REACT_APP_BACKEND_API_URL + "/resource/resources",
-          "POST",
-          JSON.stringify({
-            title: title,
-            description: description,
-            link: link,
-            audience: audience.map((audience) => audience.value),
-            image: image,
-          }),
-          {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + auth.token,
-          }
-        );
-
-        console.log(responseData);
-
-        //Display a success message if the resource was added successfully
+      if ((responseData.status = 201)) {
         toast.success("Resource added successfully!");
 
-        //Refresh the page to display the new resource
-        window.location.reload();
-      } catch (err) {
-        console.log(err);
-        console.log(err.message);
+        //Reset the form fields
+        resetForm();
 
-        if (err.message === "Failed to fetch") {
-          //Display an error message if there was a problem adding the resource to the database
-          toast.error("Could not add resource. Please try again later.");
-        } else if (err.message === "Resource already exists") {
-          //Display an error message if the resource already exists
-          toast.error("Resource already exists!");
-        } else if (
-          err.message === "Resource creation failed, Could not access database"
-        ) {
-          //Display an error message if no resources were found
-          toast.error("No resources found");
-        }
+        //Close the modal
+        props.onCancel();
       }
-    };
+    } catch (err) {
+      console.log(err);
+      console.log(err.message);
 
-    addResource();
-
-    //Reset the form fields
-    resetForm();
-
-    //Close the modal
-    props.onCancel();
+      if (err.message === "Failed to fetch") {
+        //Display an error message if there was a problem adding the resource to the database
+        toast.error("Could not add resource. Please try again later.");
+      } else if (err.message === "Resource already exists") {
+        //Display an error message if the resource already exists
+        toast.error("Resource already exists!");
+      } else if (
+        err.message === "Resource creation failed, Could not access database"
+      ) {
+        //Display an error message if no resources were found
+        toast.error("No resources found");
+      }
+    }
   };
 
   // Array of audience options that the user can select from
@@ -147,7 +136,7 @@ const ResourceModal = (props) => {
     { value: "New Students", label: "New Students" },
     { value: "Continuing Students", label: "Continuing Students" },
     { value: "Graduating Students", label: "Graduating Students" },
-    { value: "Dashboard", label: "Dashboard" },
+    { value: "General", label: "General" },
   ];
 
   return (
