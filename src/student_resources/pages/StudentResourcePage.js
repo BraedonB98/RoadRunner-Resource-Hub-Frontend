@@ -4,6 +4,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import "./styling/StudentResourcePage.css";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import Button from "../../shared/components/FormElements/Button";
 
 // Components
 import ResourceList from "../components/ResourceList";
@@ -14,7 +15,6 @@ const StudentResourcesPage = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [showResourceModal, setShowResourceModal] = useState(false); // This is the state that will determine if the modal is open or not
-  //!on importing resources from backend use props.tags to filter which resources it pulls
   const [loadedResources, setLoadedResources] = useState([]);
 
   useEffect(() => {
@@ -88,10 +88,10 @@ const StudentResourcesPage = (props) => {
         <br />
 
         {auth.isLoggedIn && (
-          <button className="new-resource-button" onClick={openResourceModal}>
+          <Button className="new-resource-button" onClick={openResourceModal}>
             {" "}
             Create New Resource <AiFillFileAdd />{" "}
-          </button>
+          </Button>
         )}
 
         {/* <button className="new-resource-button" onClick={openModal}> Add New Resource <AiFillFileAdd /> </button> */}
