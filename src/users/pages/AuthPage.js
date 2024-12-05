@@ -8,6 +8,8 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import TermsOfServiceModal from "../components/TermsOfServiceModal";
 
+import "./styling/AuthPage.css";
+
 import { AuthContext } from "../../shared/context/auth-context";
 import {
   VALIDATOR_EMAIL,
@@ -15,6 +17,7 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
+
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
@@ -51,20 +54,41 @@ const AuthPage = () => {
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
     } else {
-      setFormData(
-        {
-          ...formState.inputs,
-          name: {
-            value: "",
-            isValid: false,
-          },
-          phoneNumber: {
-            value: "",
-            isValid: false,
-          },
+      setFormData({
+        ...formState.inputs,
+        firstName: {
+          value: "",
+          isValid: false,
         },
-        false
-      );
+        middleName: {
+          value: "",
+          isValid: false,
+        },
+        lastName: {
+          value: "",
+          isValid: false,
+        },
+        phoneNumber: {
+          value: "",
+          isValid: false,
+        },
+        schoolStudentID: {
+          value: "",
+          isValid: false,
+        },
+        birthday: {
+          value: "",
+          isValid: true,
+        },
+        gender: {
+          value: "Prefer Not To Say",
+          isValid: true,
+        },
+        pronouns: {
+          value: "Prefer Not To Say",
+          isValid: true,
+        },
+      });
     }
     setIsLogin((prevMode) => !prevMode);
   };
@@ -84,23 +108,37 @@ const AuthPage = () => {
         );
         auth.login(responseData._id, responseData.token);
         navigate("/");
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       try {
+        const email = formState.inputs.email.value;
+        console.log(email);
+        const userName = email.substring(0, email.indexOf("@"));
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_API_URL}/user/createuser`,
           "POST",
           JSON.stringify({
+            firstName: formState.inputs.firstName.value,
+            middleName: formState.inputs.middleName.value,
+            lastName: formState.inputs.lastName.value,
+            userName: userName,
+            schoolStudentID: formState.inputs.schoolStudentID.value,
+            birthday: formState.inputs.birthday.value,
+            preferredName: formState.inputs.preferredName,
+            gender: formState.inputs.gender,
+            pronouns: formState.inputs.pronouns,
             email: formState.inputs.email.value,
-            name: formState.inputs.name.value,
-            phoneNumber: formState.inputs.phoneNumber.value,
             password: formState.inputs.password.value,
           }),
           { "Content-Type": "application/json" }
         );
         auth.login(responseData._id, responseData.token);
         navigate("/");
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -114,37 +152,122 @@ const AuthPage = () => {
           }}
         />
       )}
-      <br/>
-      <Card className="authentication" 
-      style = {{background: 'var(--colorSecondaryVariant)',padding:'1rem', margin:'1rem' , boxShadow: '0 2px 8px rgba(0, 0, 0, 0.26)',
-        borderRadius: '1rem 1rem 1rem 1rem',}}>
+      <br />
+      <Card className="auth-page-card">
         {isLoading && <LoadingSpinner asOverlay />}
-        <h2>Login Required</h2>
+        {isLogin && <h2>Login Required</h2>}
+        {!isLogin && <h2>Create Student Account</h2>}
         <hr />
-        <form onSubmit={authSubmitHandler}>
+        <form onSubmit={authSubmitHandler} className="auth-page-form">
           {!isLogin && (
-            <Input
-              element="input"
-              id="name"
-              type="text"
-              label="Name"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Please enter a name."
-              onInput={inputHandler}
-            />
+            <div className="auth-page-multiquestion-line">
+              <Input
+                className="auth-page-short-input"
+                element="input"
+                id="firstName"
+                type="text"
+                label="First Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a name."
+                onInput={inputHandler}
+              />
+              <Input
+                className="auth-page-short-input"
+                element="input"
+                id="middleName"
+                type="text"
+                label="Middle Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a name."
+                onInput={inputHandler}
+              />
+              <Input
+                className="auth-page-short-input"
+                element="input"
+                id="lastName"
+                type="text"
+                label="Last Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a name."
+                onInput={inputHandler}
+              />
+
+              <Input
+                className="auth-page-short-input"
+                element="input"
+                id="phoneNumber"
+                type="text"
+                label="Phone Number"
+                validators={[VALIDATOR_MINLENGTH(10), VALIDATOR_MAXLENGTH(10)]} // Corrected this line
+                errorText="Please enter a phone number."
+                onInput={inputHandler}
+              />
+              <Input
+                className="auth-page-short-input"
+                element="input"
+                id="schoolStudentID"
+                type="text"
+                label="Student ID"
+                validators={[VALIDATOR_MINLENGTH(9), VALIDATOR_MAXLENGTH(9)]} // Corrected this line
+                errorText="Please enter your S900 Number."
+                onInput={inputHandler}
+              />
+              <Input
+                className="auth-page-input"
+                element="date"
+                id="birthday"
+                type="date"
+                label="Birthday"
+                initialValid={true}
+                placeholder="MM/DD/YYYY"
+                errorText="Please enter your birthday."
+                onInput={inputHandler}
+              />
+              <Input
+                classname="auth-page-input"
+                element="select"
+                id="gender"
+                label="Gender"
+                initialValid={true}
+                errorText="Please select a gender."
+                onInput={inputHandler}
+                options={[
+                  { value: "Male", displayValue: "Male" },
+                  { value: "Female", displayValue: "Female" },
+                  { value: "Other", displayValue: "Other" },
+                  {
+                    value: "Prefer Not To Say",
+                    displayValue: "Prefer Not To Say",
+                  },
+                ]}
+              />
+              <Input
+                classname="auth-page-input"
+                element="select"
+                id="pronouns"
+                label="Pronouns"
+                initialValid={true}
+                errorText="Please select pronouns."
+                onInput={inputHandler}
+                options={[
+                  { value: "He/Him/His", displayValue: "He/Him/His" },
+                  { value: "She/Her/Hers", displayValue: "She/Her/Hers" },
+                  {
+                    value: "They/Them/Theirs",
+                    displayValue: "They/Them/Theirs",
+                  },
+                  { value: "Other", displayValue: "Other" },
+                  {
+                    value: "Prefer Not To Say",
+                    displayValue: "Prefer Not To Say",
+                  },
+                ]}
+              />
+            </div>
           )}
-          {!isLogin && (
-            <Input
-              element="input"
-              id="phoneNumber"
-              type="text"
-              label="Phone Number"
-              validators={[VALIDATOR_MINLENGTH(10) && VALIDATOR_MAXLENGTH(10)]}
-              errorText="Please enter a phone number."
-              onInput={inputHandler}
-            />
-          )}
+
           <Input
+            className="auth-page-input"
             element="input"
             id="email"
             type="email"
@@ -154,6 +277,7 @@ const AuthPage = () => {
             onInput={inputHandler}
           />
           <Input
+            className="auth-page-input"
             element="input"
             id="password"
             type="password"

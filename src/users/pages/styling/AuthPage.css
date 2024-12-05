@@ -1,0 +1,44 @@
+.auth-page-card {
+  background: var(--colorSecondaryVariant);
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 1rem 1rem 1rem 1rem;
+}
+.auth-page-form {
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.auth-page-multiquestion-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+.auth-page-short-input {
+  margin: 0rem;
+  display: flex;
+
+  min-width: calc((100% - 4rem) / 4);
+  max-width: calc((100vw - 20px) / 2);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth-page-full-input {
+  margin: 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth-page-input {
+  margin: 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
