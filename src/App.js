@@ -60,8 +60,8 @@ const App = () => {
     //non authenticated user Routes
     routes = (
       <Routes>
-        <Route path="*" element={<StudentResourcePage />} />
-        <Route path="/" exact element={<StudentResourcePage />} />
+        <Route path="*" element={<StudentResourcePage audience="General"/>} />
+        <Route path="/" exact element={<StudentResourcePage audience="General" />} />
         <Route
           path="/NewStudents"
           exact

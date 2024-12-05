@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../components/styling/Events.css";
 
 const events = [
@@ -111,7 +111,24 @@ const events = [
 
 const EventsComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardsPerSlide = 3;
+  const [cardsPerSlide, setCardsPerSlide] = useState(3);
+
+  useEffect(() => {
+    const updateCardsPerSlide = () => {
+      if (window.innerWidth <= 768) {
+        setCardsPerSlide(1);
+      } else {
+        setCardsPerSlide(3);
+      }
+    };
+
+    updateCardsPerSlide();
+    window.addEventListener("resize", updateCardsPerSlide);
+
+    return () => {
+      window.removeEventListener("resize", updateCardsPerSlide);
+    };
+  }, []);
 
   const nextSlide = () => {
     if (currentIndex + cardsPerSlide < events.length) {
@@ -135,7 +152,9 @@ const EventsComponent = () => {
         &#8592;
       </button>
 
-      <div className="events-wrapper">
+      <div
+        className={`events-wrapper ${cardsPerSlide === 1 ? "single-card" : ""}`}
+      >
         {events
           .slice(currentIndex, currentIndex + cardsPerSlide)
           .map((event, index) => (
