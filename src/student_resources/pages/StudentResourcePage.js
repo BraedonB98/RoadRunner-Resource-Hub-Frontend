@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import ResourceList from "../../student_resources/components/ResourceList";
-import ResourceModal from "../../student_resources/components/ResourceModal";
-
 import { AiFillFileAdd } from "react-icons/ai";
 import { AuthContext } from "../../shared/context/auth-context";
-import "../../student_resources/pages/styling/StudentResources.css";
-import EventsComponent from "../../student_resources/components/EventsComponent"; // Ensure this path matches your structure
+import "./styling/StudentResourcePage.css";
 
-const Welcome = () => {
+// Components
+import ResourceList from "../components/ResourceList";
+import ResourceModal from "../components/ResourceModal";
+import EventsComponent from "../components/EventsComponent"; // Ensure this path matches your structure
+
+const StudentResourcesPage = (props) => {
   const auth = useContext(AuthContext);
   const [showResourceModal, setShowResourceModal] = useState(false); // This is the state that will determine if the modal is open or not
+  //!on importing resources from backend use props.tags to filter which resources it pulls
   const [resources, setResources] = useState([
     {
       // Canvas resource
@@ -76,4 +78,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default StudentResourcesPage;
