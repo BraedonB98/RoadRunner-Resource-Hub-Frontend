@@ -6,41 +6,6 @@ import { AuthContext } from "../../shared/context/auth-context";
 import "../components/styling/ResourceList.css";
 
 const ResourceList = (props) => {
-  //   const deleteResource = async (resourceId) => {
-  //     try {
-  //       const response = await fetch(
-  //         `http://localhost:5000/api/resource/resources/${resourceId}`,
-  //         {
-  //           method: "DELETE",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: "Bearer " + auth.token,
-  //           },
-  //         }
-  //       );
-
-  //       const responseData = await response.json();
-
-  //       console.log("Resource ID: ", resourceId);
-
-  //       if (!response.ok) {
-  //         throw new Error(responseData.message);
-  //       }
-
-  //       console.log(responseData);
-
-  //       toast.success(
-  //         "Resource deleted successfully! Please refresh the page to see changes."
-  //       );
-
-  //       // Refresh the page to display new set of resources
-  //       window.location.reload(); //!use state change state to resource array without resource(saves a reload)
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  // Render each resource using the Resource component
   return (
     <ul className="resource-list">
       {props.resources.map((resource) => (

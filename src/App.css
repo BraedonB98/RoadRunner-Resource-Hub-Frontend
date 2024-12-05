@@ -1,6 +1,6 @@
 /* App.css */
 
-:root{
+:root {
   --msu-blue: #00447c;
   --msu-red: #d11242;
   --msu-grey: #717073;
@@ -15,7 +15,6 @@
   flex-direction: column;
   min-height: 100vh; /* Ensures the page takes up full viewport height */
   text-align: center;
-  
 }
 
 .content-wrap {
@@ -39,12 +38,6 @@ footer {
   padding: 10px;
   width: 100%;
   background-color: #f1f1f1;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-link {
