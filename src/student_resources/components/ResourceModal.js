@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
 import Select from "react-select";
+import Button from "../../shared/components/FormElements/Button";
 
 import Modal from "../../shared/components/UIElements/Modal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -41,6 +42,9 @@ const ResourceModal = (props) => {
   const imageChangeHandler = (event) => {
     setImage(event.target.value);
   };
+  const resourceModalSubmitHandler = async (event) => {
+
+  }
 
   //Function to reset the form fields
   const resetForm = () => {
@@ -140,7 +144,6 @@ const ResourceModal = (props) => {
   ];
 
   return (
-    <div className="add-resource-modal">
       <Modal
         className="add-resource-modal"
         onCancel={props.onCancel}
@@ -149,7 +152,8 @@ const ResourceModal = (props) => {
       >
         {isLoading && <LoadingSpinner asOverlay />}
 
-        <form className="resource-form">
+        <form className="resource-form"
+        onSubmit={resourceModalSubmitHandler}>
           <label htmlFor="title">Title</label>
 
           <input
@@ -200,21 +204,21 @@ const ResourceModal = (props) => {
           />
 
           <div className="button-container">
-            <button
+          <Button danger = {true} className = "cancel-button">
+              Cancel
+            </Button>
+            <Button
               type="submit"
               className="submit-button"
               onClick={submitHandler}
             >
               Submit
-            </button>
+            </Button>
 
-            <button onClick={props.onCancel} className="cancel-button">
-              Cancel
-            </button>
+            
           </div>
         </form>
       </Modal>
-    </div>
   );
 };
 

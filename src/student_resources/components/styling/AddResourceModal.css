@@ -53,25 +53,13 @@
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-}
-
-.submit-button {
-    background: rgb(36, 145, 36);
     color: white;
-    border-radius: 0.5rem;
-    border-color: black;
 }
 
-.cancel-button {
-    background: gray;
-    color: white;
-    border-radius: 0.5rem;
-    border-color: black;
-}
 
-.resource-form button:hover {
-    background: var(--colorPrimary);
-}
+
+
+
 
 .resource-form label {
     font-size: 1rem;

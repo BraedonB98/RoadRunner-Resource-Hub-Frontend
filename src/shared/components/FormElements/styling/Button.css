@@ -3,7 +3,7 @@
   padding: 0.5rem 1.5rem;
   border: 1px solid var(--colorOnSecondary);
   border-radius: 4px;
-  background: lightgreen;
+  background: green;
   color: var(--colorOnSecondary);
   cursor: pointer;
   margin-right: 1rem;
@@ -17,7 +17,8 @@
 
 .button:hover,
 .button:active {
-  background: green;
+  
+  background: #44c767;
   color: var(--colorOnSecondaryVariant);
 }
 
