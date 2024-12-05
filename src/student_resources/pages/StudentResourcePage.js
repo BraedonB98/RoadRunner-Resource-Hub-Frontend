@@ -19,6 +19,9 @@ const StudentResourcesPage = (props) => {
 
   useEffect(() => {
     const fetchResources = async () => {
+      console.log(
+        `${process.env.REACT_APP_BACKEND_API_URL}/resource/public/${props.audience}`
+      );
       try {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_API_URL}/resource/public/${props.audience}`,
@@ -26,12 +29,18 @@ const StudentResourcesPage = (props) => {
           null,
           { Authorization: `Bearer ${auth.token}` }
         );
-        setLoadedResources(responseData.resources);
         console.log(responseData);
-      } catch (err) {}
+        if (responseData.resources) {
+          setLoadedResources(responseData.resources);
+        } else {
+          setLoadedResources([]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchResources();
-  }, [sendRequest, auth]);
+  }, [sendRequest, auth, props.audience]);
 
   const openResourceModal = () => {
     setShowResourceModal(true);

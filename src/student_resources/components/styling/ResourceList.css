@@ -7,3 +7,12 @@
   flex-wrap: wrap;
   margin: 1rem;
 }
+.resource-list-missing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+}
