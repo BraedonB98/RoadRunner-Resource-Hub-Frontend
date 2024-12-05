@@ -4,7 +4,7 @@ import ResourceModal from "../../student_resources/components/ResourceModal";
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { AuthContext } from "../../shared/context/auth-context";
-//import "../../student_resources/pages/styling/StudentResources.css";
+import "../../student_resources/pages/styling/StudentResources.css";
 import EventsComponent from "../../student_resources/components/EventsComponent"; // Ensure this path matches your structure
 
 const Welcome = () => {

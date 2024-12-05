@@ -1,12 +1,8 @@
 .resource-list {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-evenly;
+  align-items: stretch;
   flex-wrap: wrap;
   margin: 1rem;
-}
-
-.resource-list > * {
-  margin: 0 0.5rem; /* Adjust the margin as needed */
 }

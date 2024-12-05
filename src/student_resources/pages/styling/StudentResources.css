@@ -1,171 +1,49 @@
-
-/* Student Resources Page Styling */ 
-
-/* Styling to help getting rid of white space on the right side of the page */
-html, body{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-}
+/* Student Resources Page Styling */
 
 .homePage-background,
 .NewStudents-background,
 .ContinuingStudents-background,
 .GraduatingStudents-background {
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-    max-width: 100vw;
-    width: 100%;
-    z-index: 1;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 100%;
+  z-index: 1;
 }
 
 .homePage-background::before,
 .NewStudents-background::before,
 .ContinuingStudents-background::before,
 .GraduatingStudents-background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to improve text readability */
-    z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Dark overlay to improve text readability */
+  z-index: -1;
 }
 
 .homePage-background {
-    background-image: url(../../../../public/images/homeBackground.jpg);
+  background-image: url(../../../../public/images/homeBackground.jpg);
 }
 
 .NewStudents-background {
-    background-image: url(../../../../public/images/NewStudentsBackground.jpg);
+  background-image: url(../../../../public/images/NewStudentsBackground.jpg);
 }
 
 .ContinuingStudents-background {
-    background-image: url(../../../../public/images/ContinuingStudentsBackground.jpg);
+  background-image: url(../../../../public/images/ContinuingStudentsBackground.jpg);
 }
 
 .GraduatingStudents-background {
-    background-image: url(../../../../public/images/GraduationBackground.jpg);
+  background-image: url(../../../../public/images/GraduationBackground.jpg);
 }
-
-
-.welcome-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.welcome-container h2{
-    font-size: 1.8rem;
-    margin: 0rem;
-    padding: 1rem;
-}
-
-
-.welcome-card{
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-    padding: 0;
-    background: var(--colorSecondary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    border-radius: 1rem 1rem 1rem 1rem ;
-    overflow: hidden;
-    align-items: stretch;
-}
-
-.welcome-card p{
-    font-size: 1rem;
-    margin: 0;
-    padding: 1rem;
-    text-align: center;
-    font-weight: bold;
-}
-
-.welcome-image{
-    max-width: 100%;
-    height: 200px;
-    border-radius: 1rem 1rem 0 0;
-    object-fit: cover;
-}
-
-.canvas-image{
-    max-width: 100%;
-    height: 200px;
-    border-radius: 1rem 1rem 0 0;
-    object-fit: cover;
-}
-
-
-.page-welcometext{
-    font-size: 16px;
-    padding-top: 1rem;
-    color: white;
-    text-align: center;
-}
-
-.page-welcometext p{
-    font-size: 16px;
-    font-weight: 500;
-    color: white;
-}
-
-.welcomePage-text{
-    font-size: 16px;
-    padding-top: 1rem;
-    color: white;
-    text-align: center;
-}
-
-.welcomePage-text p{
-    font-size: 16px;
-    padding-top: 1rem;
-    font-weight: 500;
-    color: white;
-}
-
-.resource-button-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.new-resource-button{
-    background: limegreen;
-    color: white;
-    border-radius: 1rem;
-    border-color: black;
-    padding: 0.5rem 1rem;
-    margin: 1rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.new-resource-button:hover{
-    background: lightgreen;
-}
-
-.welcome-card:hover{
-    
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.26);
-    border-radius: 1rem 1rem 1rem 1rem;
-    /* background: var(--colorSecondaryVariant); */
-    
-}
-
-@media (min-width: 768px) {
-    .welcome-card{
-        width: 30%;
-    }
-    
-}
-
