@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ResourceList from "../../student_resources/components/ResourceList";
-import AddResourceModal from "../../student_resources/components/AddResourceModal";
+import ResourceModal from "../../student_resources/components/ResourceModal";
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -9,30 +9,65 @@ import EventsComponent from "../../student_resources/components/EventsComponent"
 
 const Welcome = () => {
   const auth = useContext(AuthContext);
-  const [showModal, setShowModal] = useState(false); // This is the state that will determine if the modal is open or not
-  
-  const [resources, setResources] = useState([]);
+  const [showResourceModal, setShowResourceModal] = useState(false); // This is the state that will determine if the modal is open or not
+  const [resources, setResources] = useState([
+    {
+      // Canvas resource
+      name: "Canvas",
+      tags: ["Canvas", "Learning Management System", "Courses", "Assignments"],
+      description:
+        "Access your courses, submit assignments, and communicate with professors.",
+      link: "https://msudenver.instructure.com/login/saml", // Canvas link
+      image:
+        process.env.REACT_APP_ASSET_URL +
+        "/data/frontendref/images/canvas3.png",
+    },
+    {
+      // Student Organizations/Clubs resource
+      name: "Student Organizations",
+      tags: ["Student Organizations", "Clubs", "Student Life"],
+      description: "Learn about student organizations and clubs at MSU Denver.",
+      link: "https://roadrunnerlink.msudenver.edu/organizations",
+      image:
+        process.env.REACT_APP_ASSET_URL + "/data/frontendref/images/clubs.jpg",
+    },
+    {
+      // Campus Map resource
+      name: "Campus Map",
+      tags: ["Campus Map", "Map", "Campus"],
+      description: "View the campus map to help find your way around.",
+      link: "https://map.concept3d.com/?id=225#!ct/2310?s",
+      image:
+        process.env.REACT_APP_ASSET_URL +
+        "/data/frontendref/images/Campus1.jpg",
+    },
+  ]);
 
-  const openModal = () => {
-    setShowModal(true);
-  }
+  const openResourceModal = () => {
+    setShowResourceModal(true);
+  };
 
-  const closeModal = () => {
-    setShowModal(false);
-  }
+  const closeResourceModal = () => {
+    setShowResourceModal(false);
+  };
 
-  useEffect(() => {
+  /* useEffect(() => {
     const fetchResources = async () => {
       try {
         // const response = await fetch(`http://localhost:5000/api/resource/resources/dashboard`);
-        const response = await fetch(process.env.REACT_APP_BACKEND_API_URL + '/resource/resources/dashboard');
+        const response = await fetch(
+          process.env.REACT_APP_BACKEND_API_URL +
+            "/resource/resources/dashboard"
+        );
         const responseData = await response.json();
 
         if (!response.ok) {
           throw new Error(responseData.message);
         }
 
-        const userResources = responseData.resources.filter(resource => resource.creator === auth.UID);
+        const userResources = responseData.resources.filter(
+          (resource) => resource.creator === auth.UID
+        );
         setResources(userResources);
       } catch (err) {
         console.log(err);
@@ -40,59 +75,33 @@ const Welcome = () => {
     };
 
     fetchResources();
-  }
-  , [auth.UID]);
+  }, [auth.UID]);
 
+  */
   return (
     <React.Fragment>
-
       <div className="homePage-background">
+        <br />
+        <br />
+        <br />
+        <div className="resource-button-container">
+          {auth.isLoggedIn && (
+            <button className="new-resource-button" onClick={openResourceModal}>
+              {" "}
+              Create New Resource <AiFillFileAdd />{" "}
+            </button>
+          )}
 
-        <div className="welcomePage-text">
-          <h1>Welcome to the Roadrunner Resource Hub!</h1>
-          <p>
-            Here you will find common resources for all your academic needs.
-            Whether you are a freshman sophomore, junior or a senior!{" "}
-          </p>
-        </div>
-
-
-        <div className= "resource-button-container">
-
-          {auth.isLoggedIn && (<button className="new-resource-button" onClick={openModal}> Add New Resource <AiFillFileAdd /> </button>)}
-
-         {/* <button className="new-resource-button" onClick={openModal}> Add New Resource <AiFillFileAdd /> </button> */}
-
+          {/* <button className="new-resource-button" onClick={openModal}> Add New Resource <AiFillFileAdd /> </button> */}
         </div>
 
         <EventsComponent />
+        <ResourceList resources={resources} />
 
-        <div className="welcome-container">
-          {/* This is the container for the cards, put all the cards in here to make them appear in a row */}
-
-              <ResourceList name="Canvas" />
-
-              <ResourceList name="Student Email" />
-
-              <ResourceList name= "Financial Aid" />
-
-              <ResourceList name="Degree Progress Report" />
-
-              <ResourceList name="Academic Advising" />
-
-              <ResourceList name= "VMock" />
-
-              <ResourceList name="Register for Classes" />
-
-              <ResourceList resources={resources} />
-
-          </div>
-
-          <AddResourceModal show={showModal} onCancel={closeModal} />
+        <ResourceModal show={showResourceModal} onCancel={closeResourceModal} />
       </div>
-
-        </React.Fragment>
-    )
-}
+    </React.Fragment>
+  );
+};
 
 export default Welcome;
