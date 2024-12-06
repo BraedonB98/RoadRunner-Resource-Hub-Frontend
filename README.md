@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Road Runner Resource Hub Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Road Runner Resource Hub Project. The purpose of this project is to be able to provide MSU Denver students with all the resources they actually need during their time here at MSU Denver. The official MSU Denver website is cluttered, filled with too many links, overwhelming and unsearchable. The RoadRunner Resource Hub allows us to condense down this information into a more readable and digestible format.
 
-## Available Scripts
+## Running Product (to future server admin)
 
-In the project directory, you can run:
+Bellow are listed instructions, resources, and details for accessing, deploying and maintaining the code base for the Road Runner Resource Hub
 
-### `npm start`
+### Necessary Resources
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Github account (https://github.com/)
+- Visual Studio Code (https://code.visualstudio.com/)
+- Node Package Manager(https://www.npmjs.com/)
+- Server For Deployment(or remote server)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Steps for Deployment
 
-### `npm test`
+1. Locate project from the github website (https://github.com/BraedonB98/CS4610-RoadRunnerResourceHub.git)
+2. Clone project for local repository
+   - open terminal in local directory
+   - run "git clone https://github.com/BraedonB98/CS4610-RoadRunnerResourceHubFrontend.git"
+   - cd CS46100-RoadRunnerResourceHub
+   - cd roadrunner-resource-hub-frontend
+3. Build project(creates necessary files in a format for deployment)
+   - install dependencies
+     - run "npm install"
+   - install server npm package
+     - run "npm install -g serve"
+   - run "npm run build"
+     - This will generate a build folder
+   - on server run "serve -s build -l <portNumber>
+4. For Firebase Deployment(https://firebase.google.com/docs/hosting/quickstart)
+   - install firebase CLI(https://firebase.google.com/docs/cli#install_the_firebase_cli)
+   - initialize project
+     - from the frontend folder run "firebase init hosting" (only for first time deployment)
+     - run "firebase deploy" and follow on screen instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Developmental Roadmap
