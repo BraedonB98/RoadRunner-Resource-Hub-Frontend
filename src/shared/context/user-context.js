@@ -1,10 +1,21 @@
 import { createContext } from "react";
 
 export const UserContext = createContext({
-  name: null,
+  firstName: null,
+  middleName: null,
+  lastName: null,
   email: null,
-  userId: null,
-  imageUrl: `data/uploads/images/default.svg`,//will need to add Authorization level to user context -> then make add new resource only appear on appropriate pages
+  preferredName: null,
+  gender: null,
+  pronouns: null,
+  imageUrl: `data/uploads/images/default.svg`,
+  accounts: null, //Admin, Faculty, Student, Staff, Industry Partner
+  signedInAs: null,
+  accountID: null,
+  schoolID: null,
+  accountValues: null,
   setUser: () => {},
   removeUser: () => {},
+  switchAccount: () => {},
+  updateAccount: () => {},
 });

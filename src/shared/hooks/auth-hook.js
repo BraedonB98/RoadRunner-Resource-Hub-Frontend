@@ -6,10 +6,13 @@ export const UserAuth = () => {
   const [token, setToken] = useState();
   const [tokenExpiration, setTokenExpiration] = useState();
   const [UID, setUID] = useState();
+  const [imageUrl, setImageUrl] = useState(`data/uploads/images/default.svg`);
 
-  const login = useCallback((uid, token, expiration) => {
+  const login = useCallback((uid, token, expiration, imageUrl) => {
     setToken(token);
     setUID(uid);
+    setImageUrl(imageUrl);
+
     if (!expiration) {
       expiration = new Date(new Date().getTime() + 1000 * 60 * 60 * 2);
       setTokenExpiration(expiration);
@@ -22,6 +25,7 @@ export const UserAuth = () => {
         userId: uid,
         token: token,
         expiration: expiration.toISOString(),
+        imageUrl: imageUrl,
       })
     );
   }, []);
@@ -30,6 +34,7 @@ export const UserAuth = () => {
     setToken(null);
     setTokenExpiration(null);
     setUID(null);
+    setImageUrl(`data/uploads/images/default.svg`);
     localStorage.removeItem("userData");
   }, []);
 
@@ -56,5 +61,5 @@ export const UserAuth = () => {
     }
   }, [login]);
 
-  return { token, login, logout, UID };
+  return { token, login, logout, UID, imageUrl };
 };
