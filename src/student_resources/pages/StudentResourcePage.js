@@ -5,6 +5,7 @@ import "./styling/StudentResourcePage.css";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import Button from "../../shared/components/FormElements/Button";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 
 // Components
 import ResourceList from "../components/ResourceList";
@@ -15,32 +16,35 @@ const StudentResourcesPage = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [showResourceModal, setShowResourceModal] = useState(false); // This is the state that will determine if the modal is open or not
+  const [loadedEvents, setLoadedEvents] = useState([]);
   const [loadedResources, setLoadedResources] = useState([]);
 
   useEffect(() => {
+    const abortController = new AbortController();
     const fetchResources = async () => {
-      console.log(
-        `${process.env.REACT_APP_BACKEND_API_URL}/resource/public/${props.audience}`
-      );
-      setLoadedResources([]);
       try {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_API_URL}/resource/public/${props.audience}`,
           "GET",
           null,
-          { Authorization: `Bearer ${auth.token}` }
+          { Authorization: `Bearer ${auth.token}` },
+          { signal: abortController.signal }
         );
-        console.log(responseData);
         if (responseData.resources) {
           setLoadedResources(responseData.resources);
         } else {
           setLoadedResources([]);
         }
       } catch (err) {
-        console.log(err);
+        if (err.name !== "AbortError") {
+          console.log(err);
+        }
       }
     };
     fetchResources();
+    return () => {
+      abortController.abort();
+    };
   }, [sendRequest, auth, props.audience]);
 
   const openResourceModal = () => {
@@ -78,6 +82,7 @@ const StudentResourcesPage = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <div
         className="student-resource-page-background"
         style={{
@@ -88,16 +93,31 @@ const StudentResourcesPage = (props) => {
         <br />
         <br />
 
-        <EventsComponent />
-        {auth.isLoggedIn && (
+        {isLoading && (
+          <div className="center">
+            <LoadingSpinner />
+          </div>
+        )}
+
+        {!isLoading && loadedEvents && <EventsComponent />}
+
+        {!isLoading && auth.isLoggedIn && loadedResources && (
           <Button className="new-resource-button" onClick={openResourceModal}>
             {" "}
             Create New Resource <AiFillFileAdd />{" "}
           </Button>
         )}
-        <ResourceList resources={loadedResources} />
 
-        <ResourceModal show={showResourceModal} onCancel={closeResourceModal} />
+        {!isLoading && loadedResources && (
+          <ResourceList resources={loadedResources} />
+        )}
+
+        {!isLoading && loadedResources && (
+          <ResourceModal
+            show={showResourceModal}
+            onCancel={closeResourceModal}
+          />
+        )}
       </div>
 
       {isLoading && (
