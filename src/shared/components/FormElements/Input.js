@@ -56,7 +56,9 @@ const Input = (props) => {
         value={inputState.value}
       >
         {props.options.map((option) => (
-          <option value={option.value}>{option.displayValue}</option>
+          <option key={option.key} value={option.value}>
+            {option.displayValue}
+          </option>
         ))}
       </select>
     );

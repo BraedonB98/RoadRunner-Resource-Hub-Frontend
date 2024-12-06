@@ -94,7 +94,7 @@ const AuthPage = () => {
   };
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-
+    console.log("Logging in");
     if (isLogin) {
       try {
         const responseData = await sendRequest(
@@ -108,39 +108,36 @@ const AuthPage = () => {
         );
         auth.login(responseData._id, responseData.token);
         navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (err) {}
     } else {
       try {
         const email = formState.inputs.email.value;
-        console.log(email);
         const userName = email.split("@")[0];
         const birthday = new Date(formState.inputs.birthday.value);
+        let newUser = {
+          firstName: formState.inputs.firstName.value,
+          middleName: formState.inputs.middleName.value,
+          lastName: formState.inputs.lastName.value,
+          phoneNumber: formState.inputs.phoneNumber.value,
+          userName: userName,
+          schoolStudentID: formState.inputs.schoolStudentID.value,
+          birthdate: birthday,
+          preferredName: formState.inputs.firstName.value,
+          gender: formState.inputs.gender.value || "Male",
+          pronouns: formState.inputs.pronouns.value || "He/Him/His",
+          email: formState.inputs.email.value,
+          password: formState.inputs.password.value,
+        };
+
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_API_URL}/user/student/createstudent`,
           "POST",
-          JSON.stringify({
-            firstName: formState.inputs.firstName.value,
-            middleName: formState.inputs.middleName.value,
-            lastName: formState.inputs.lastName.value,
-            phoneNumber: formState.inputs.phoneNumber.value,
-            userName: userName,
-            schoolStudentID: formState.inputs.schoolStudentID.value,
-            birthdate: birthday,
-            preferredName: formState.inputs.firstName.value,
-            gender: formState.inputs.gender.value || "Male",
-            pronouns: formState.inputs.pronouns.value || "He/Him/His",
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value,
-          }),
+          JSON.stringify(newUser),
           { "Content-Type": "application/json" }
         );
         auth.login(responseData._id, responseData.token);
         navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (err) {}
     }
   };
 
@@ -170,7 +167,7 @@ const AuthPage = () => {
                 type="text"
                 label="First Name"
                 validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter a name."
+                errorText="Please enter a first name."
                 onInput={inputHandler}
               />
               <Input
@@ -180,7 +177,7 @@ const AuthPage = () => {
                 type="text"
                 label="Middle Name"
                 validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter a name."
+                errorText="Please enter a middle name."
                 onInput={inputHandler}
               />
               <Input
@@ -190,7 +187,7 @@ const AuthPage = () => {
                 type="text"
                 label="Last Name"
                 validators={[VALIDATOR_REQUIRE()]}
-                errorText="Please enter a name."
+                errorText="Please enter a last name."
                 onInput={inputHandler}
               />
 
@@ -211,7 +208,7 @@ const AuthPage = () => {
                 type="text"
                 label="Student ID"
                 validators={[VALIDATOR_MINLENGTH(9), VALIDATOR_MAXLENGTH(9)]} // Corrected this line
-                errorText="Please enter your S900 Number."
+                errorText="Please enter your valid S900 Number."
                 onInput={inputHandler}
               />
               <Input
@@ -224,25 +221,25 @@ const AuthPage = () => {
                 initialValid={true}
                 initialValue="2000-01-01"
                 placeholder="MM/DD/YYYY"
-                errorText="Please enter your birthday."
+                errorText=""
                 onInput={inputHandler}
               />
               <Input
                 classname="auth-page-input"
                 element="select"
                 id="gender"
-                initialState="male"
+                initialState="Male"
                 label="Gender"
                 validators={[]}
                 initialValid={true}
                 errorText="Please select a gender."
                 onInput={inputHandler}
                 options={[
-                  { value: "Male", displayValue: "Male" },
-
-                  { value: "Female", displayValue: "Female" },
-                  { value: "Other", displayValue: "Other" },
+                  { key: "male", value: "Male", displayValue: "Male" },
+                  { key: "female", value: "Female", displayValue: "Female" },
+                  { key: "other", value: "Other", displayValue: "Other" },
                   {
+                    key: "prefer-not-to-say",
                     value: "Prefer Not To Say",
                     displayValue: "Prefer Not To Say",
                   },
@@ -254,18 +251,29 @@ const AuthPage = () => {
                 id="pronouns"
                 label="Pronouns"
                 validators={[]}
+                initialState="Prefer Not To Say"
                 initialValid={true}
                 errorText="Please select pronouns."
                 onInput={inputHandler}
                 options={[
-                  { value: "He/Him/His", displayValue: "He/Him/His" },
-                  { value: "She/Her/Hers", displayValue: "She/Her/Hers" },
                   {
+                    key: "he-him",
+                    value: "He/Him/His",
+                    displayValue: "He/Him/His",
+                  },
+                  {
+                    key: "she-her",
+                    value: "She/Her/Hers",
+                    displayValue: "She/Her/Hers",
+                  },
+                  {
+                    key: "they-them",
                     value: "They/Them/Theirs",
                     displayValue: "They/Them/Theirs",
                   },
-                  { value: "Other", displayValue: "Other" },
+                  { key: "other", value: "Other", displayValue: "Other" },
                   {
+                    key: "prefer-not-to-say",
                     value: "Prefer Not To Say",
                     displayValue: "Prefer Not To Say",
                   },
@@ -308,13 +316,13 @@ const AuthPage = () => {
                 id="termsOfService"
                 name="termsOfService"
                 value="Agree"
-                onClick={(event) => {
+                onClick={() => {
                   termsOfService
                     ? setTermsOfService(false)
                     : setTermsOfService(true);
                 }}
               />
-              <label for="termsOfService">
+              <label htmlFor="termsOfService">
                 {" "}
                 I Agree &nbsp;&nbsp;&nbsp;&nbsp;
               </label>
