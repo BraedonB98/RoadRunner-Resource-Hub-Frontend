@@ -5,7 +5,7 @@ import "./styling/StudentResourcePage.css";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import Button from "../../shared/components/FormElements/Button";
-
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 // Components
 import ResourceList from "../components/ResourceList";
 import ResourceModal from "../components/ResourceModal";
@@ -16,6 +16,7 @@ const StudentResourcesPage = (props) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [showResourceModal, setShowResourceModal] = useState(false); // This is the state that will determine if the modal is open or not
   const [loadedResources, setLoadedResources] = useState([]);
+  const [loadedEvents, setLoadedEvents] = useState([]);
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -78,6 +79,7 @@ const StudentResourcesPage = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <div
         className="student-resource-page-background"
         style={{
@@ -88,16 +90,31 @@ const StudentResourcesPage = (props) => {
         <br />
         <br />
 
-        <EventsComponent />
-        {auth.isLoggedIn && (
+        {isLoading && (
+          <div className="center">
+            <LoadingSpinner />
+          </div>
+        )}
+
+        {!isLoading && loadedEvents && <EventsComponent />}
+
+        {!isLoading && auth.isLoggedIn && loadedResources && (
           <Button className="new-resource-button" onClick={openResourceModal}>
             {" "}
             Create New Resource <AiFillFileAdd />{" "}
           </Button>
         )}
-        <ResourceList resources={loadedResources} />
 
-        <ResourceModal show={showResourceModal} onCancel={closeResourceModal} />
+        {!isLoading && loadedResources && (
+          <ResourceList resources={loadedResources} />
+        )}
+
+        {!isLoading && loadedResources && (
+          <ResourceModal
+            show={showResourceModal}
+            onCancel={closeResourceModal}
+          />
+        )}
       </div>
 
       {isLoading && (
