@@ -42,9 +42,7 @@ const ResourceModal = (props) => {
   const imageChangeHandler = (event) => {
     setImage(event.target.value);
   };
-  const resourceModalSubmitHandler = async (event) => {
-
-  }
+  const resourceModalSubmitHandler = async (event) => {};
 
   //Function to reset the form fields
   const resetForm = () => {
@@ -144,81 +142,78 @@ const ResourceModal = (props) => {
   ];
 
   return (
-      <Modal
-        className="add-resource-modal"
-        onCancel={props.onCancel}
-        show={props.show}
-        header="Add a Resource"
-      >
-        {isLoading && <LoadingSpinner asOverlay />}
+    <Modal
+      className="add-resource-modal"
+      onCancel={props.onCancel}
+      show={props.show}
+      header="Add a Resource"
+    >
+      {isLoading && <LoadingSpinner asOverlay />}
 
-        <form className="resource-form"
-        onSubmit={resourceModalSubmitHandler}>
-          <label htmlFor="title">Title</label>
+      <form className="resource-form" onSubmit={resourceModalSubmitHandler}>
+        <label htmlFor="title">Title</label>
 
-          <input
-            type="text"
-            id="title"
-            name="title"
-            onChange={titleChangeHandler}
-            value={title}
-          />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          onChange={titleChangeHandler}
+          value={title}
+        />
 
-          <label htmlFor="description">Description </label>
+        <label htmlFor="description">Description </label>
 
-          <textarea
-            id="description"
-            name="description"
-            onChange={descriptionChangeHandler}
-            value={description}
-          />
+        <textarea
+          id="description"
+          name="description"
+          onChange={descriptionChangeHandler}
+          value={description}
+        />
 
-          <label htmlFor="audience">Audience</label>
+        <label htmlFor="audience">Audience</label>
 
-          <Select
-            options={audienceOptions}
-            onChange={setAudience}
-            value={audience}
-            placeholder="Select Audience"
-            isMulti
-          />
+        <Select
+          options={audienceOptions}
+          onChange={setAudience}
+          value={audience}
+          placeholder="Select Audience"
+          isMulti
+        />
 
-          <label htmlFor="link">Link</label>
+        <label htmlFor="link">Link</label>
 
-          <input
-            type="text"
-            id="link"
-            name="link"
-            onChange={linkChangeHandler}
-            value={link}
-          />
+        <input
+          type="text"
+          id="link"
+          name="link"
+          onChange={linkChangeHandler}
+          value={link}
+        />
 
-          <label htmlFor="image">Image</label>
+        <label htmlFor="image">Image</label>
 
-          <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={imageChangeHandler}
-            value={image}
-          />
+        <input
+          type="file"
+          id="image"
+          name="image"
+          onChange={imageChangeHandler}
+          value={image}
+        />
 
-          <div className="button-container">
-          <Button danger = {true} className = "cancel-button">
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              className="submit-button"
-              onClick={submitHandler}
-            >
-              Submit
-            </Button>
-
-            
-          </div>
-        </form>
-      </Modal>
+        <div className="button-container">
+          <Button danger={true} className="cancel-button">
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            className="submit-button"
+            onClick={submitHandler}
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
+    </Modal>
   );
 };
 

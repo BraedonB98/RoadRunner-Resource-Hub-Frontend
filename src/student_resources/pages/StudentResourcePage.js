@@ -35,11 +35,7 @@ const StudentResourcesPage = (props) => {
         } else {
           setLoadedResources([]);
         }
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          console.log(err);
-        }
-      }
+      } catch (err) {}
     };
     fetchResources();
     return () => {
