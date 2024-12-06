@@ -20,9 +20,6 @@ const StudentResourcesPage = (props) => {
 
   useEffect(() => {
     const fetchResources = async () => {
-      console.log(
-        `${process.env.REACT_APP_BACKEND_API_URL}/resource/public/${props.audience}`
-      );
       setLoadedResources([]);
       try {
         const responseData = await sendRequest(
@@ -31,7 +28,7 @@ const StudentResourcesPage = (props) => {
           null,
           { Authorization: `Bearer ${auth.token}` }
         );
-        console.log(responseData);
+
         if (responseData.resources) {
           setLoadedResources(responseData.resources);
         } else {
